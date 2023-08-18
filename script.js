@@ -41,3 +41,66 @@ proObj.then((roll_no)=>{  //proObj.then((roll_no) => {: Attaches a then handler 
 .catch((error)=>{  //.catch((error) => {: Attaches a catch handler to catch and log any errors that occurred in the promise chain.
     console.log(error);
 })
+
+
+
+
+
+
+
+
+
+const Student = new Promise( (resolve, reject) =>{
+    setTimeout(()=>{
+        let serialNumber = [1,2,3,4,5,6,7,8,9,10];
+        resolve(serialNumber);
+        // reject('error');
+    }, 2000);
+} );
+
+const addData  =  (addOn) => {
+    return new Promise ((resolve, reject)=>{
+        setTimeout((addOn)=>{
+            let details = {
+                name : 'Hriday',
+                surname : 'Jadhav',
+                age : 21,
+                contact : 9689516884
+            }
+            let {name, surname, age, contact} = details;
+            resolve(`
+            My serial number is ${addOn}
+            I am ${name} ${surname}
+            I am ${age} years old
+            And my number is ${contact}
+            `);
+        },3000, addOn)
+    })
+} 
+const addSec = (addSecond) => {
+    return new Promise ((resolve, reject)=>{
+        setTimeout(()=>{
+            let sec = {
+                gender : 'Male',
+            }
+            reject('Oops, error! You cannot add more.')
+        },3000), addSecond;
+    });
+}
+
+Student.then((studd)=>{
+    console.log(studd);
+    return addData(studd[1]);
+}).then((data)=>{
+    console.log(data);
+    return addSec(data[1])
+    
+}).then((section)=>{
+    console.log(section);
+})
+.catch((err)=>{
+    console.log(err);
+}).catch((secErr)=>{
+    console.log(secErr);
+})
+
